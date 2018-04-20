@@ -5,6 +5,7 @@ import com.google.gson.Gson;
 import br.ufpb.ci.marmitariaci.model.domain.TipoDeConexao;
 import br.ufpb.ci.marmitariaci.model.domain.Usuario;
 import br.ufpb.ci.marmitariaci.model.network.ConectaServico;
+import br.ufpb.ci.marmitariaci.model.network.ConexaoRemotaEnvioTemplate;
 import br.ufpb.ci.marmitariaci.presenter.CadastroPresenter;
 import br.ufpb.ci.marmitariaci.presenter.LoginPresenter;
 
@@ -23,7 +24,7 @@ public class ModelUsuarioClienteImpl implements ModelUsuario<Usuario> {
 
     @Override
     public void adiciona(Usuario u) {
-        ConectaServico servico = new ConectaServico(TipoDeConexao.porCadastroCliente, this);
+        ConectaServico servico = new ConectaServico(TipoDeConexao.porCadastroCliente);
         String json = new Gson().toJson(u);
         Integer retorno = servico.enviaDados(json);
         if(retorno == null){
@@ -37,6 +38,15 @@ public class ModelUsuarioClienteImpl implements ModelUsuario<Usuario> {
 
     @Override
     public void autentica(Usuario u) {
+        ConectaServico servico = new ConectaServico(TipoDeConexao.porLoginCliente);
+        Integer retorno = servico.recuperaDados(u.getUsuario(), u.getSenha());
+        if(retorno == null){
+            erroLogin("Erro ao conectar ao servidor");
+        }else if(retorno == 401){
+            erroLogin("Usuário ou senha incorretos");
+        }else if(retorno == 200){
+            loginPresenter.loginSucesso();
+        }
     }
 
     @Override

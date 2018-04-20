@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,10 +18,14 @@ public class LoginUsuarioActivity extends AppCompatActivity implements LoginView
     private TextView texto_cadastro;
     private Button botao_login;
     private LoginPresenter presenter;
+    private EditText campo_login;
+    private EditText campo_senha;
 
     private void iniciaComponentes(){
         texto_cadastro = findViewById(R.id.cadCliId);
         botao_login = findViewById(R.id.entrarButtonCliId);
+        campo_login = findViewById(R.id.loginInputId);
+        campo_senha = findViewById(R.id.senhaInputCliId);
     }
 
     @Override
@@ -63,6 +68,15 @@ public class LoginUsuarioActivity extends AppCompatActivity implements LoginView
 
     @Override
     public void onClick(View view) {
-        presenter.eventoBotao(view.getId());
+        switch (view.getId()){
+            case R.id.entrarButtonCliId:
+                String login = campo_login.getText().toString();
+                String senha = campo_senha.getText().toString();
+                presenter.validaDados(login, senha);
+                break;
+            default:
+                presenter.eventoBotao(view.getId());
+                break;
+        }
     }
 }

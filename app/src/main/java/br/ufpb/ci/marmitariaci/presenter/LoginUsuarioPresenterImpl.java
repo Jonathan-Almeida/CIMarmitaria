@@ -4,6 +4,9 @@ import android.content.Context;
 import android.view.View;
 
 import br.ufpb.ci.marmitariaci.R;
+import br.ufpb.ci.marmitariaci.model.business.ModelUsuario;
+import br.ufpb.ci.marmitariaci.model.business.ModelUsuarioClienteImpl;
+import br.ufpb.ci.marmitariaci.model.domain.Usuario;
 import br.ufpb.ci.marmitariaci.view.CadastroClienteActivity;
 import br.ufpb.ci.marmitariaci.view.LoginView;
 import br.ufpb.ci.marmitariaci.view.PainelUsuarioActivity;
@@ -11,14 +14,19 @@ import br.ufpb.ci.marmitariaci.view.PainelUsuarioActivity;
 public class LoginUsuarioPresenterImpl implements LoginPresenter {
 
     private LoginView loginView;
+    private ModelUsuario model;
 
     public LoginUsuarioPresenterImpl(LoginView loginView) {
         this.loginView = loginView;
+        this.model = new ModelUsuarioClienteImpl(this);
     }
 
     @Override
     public void validaDados(String usuario, String senha) {
-
+        Usuario u = new Usuario();
+        u.setUsuario(usuario);
+        u.setSenha(senha);
+        model.autentica(u);
     }
 
     @Override

@@ -23,7 +23,7 @@ public class ModelUsuarioFornecedorImpl implements ModelUsuario<Fornecedor> {
 
     @Override
     public void adiciona(Fornecedor u) {
-        ConectaServico servico = new ConectaServico(TipoDeConexao.porCadastroFornecedor, this);
+        ConectaServico servico = new ConectaServico(TipoDeConexao.porCadastroFornecedor);
         String json = new Gson().toJson(u);
         Integer retorno = servico.enviaDados(json);
         if(retorno == null){
@@ -37,7 +37,15 @@ public class ModelUsuarioFornecedorImpl implements ModelUsuario<Fornecedor> {
 
     @Override
     public void autentica(Fornecedor fornecedor) {
-
+        ConectaServico servico = new ConectaServico(TipoDeConexao.porLoginFornecedor);
+        Integer retorno = servico.recuperaDados(fornecedor.getEmail(), fornecedor.getSenha());
+        if(retorno == null){
+            erroLogin("Erro ao conectar ao servidor");
+        }else if(retorno == 401){
+            erroLogin("Usuário ou senha incorretos");
+        }else if(retorno == 200){
+            loginPresenter.loginSucesso();
+        }
     }
 
     @Override
@@ -47,6 +55,6 @@ public class ModelUsuarioFornecedorImpl implements ModelUsuario<Fornecedor> {
 
     @Override
     public void erroLogin(String mensagem) {
-
+        loginPresenter.loginFalhou(mensagem);
     }
 }

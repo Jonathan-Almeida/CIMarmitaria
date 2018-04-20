@@ -16,12 +16,16 @@ import br.ufpb.ci.marmitariaci.presenter.LoginUsuarioPresenterImpl;
 public class LoginFornecedorActivity extends AppCompatActivity implements LoginView, View.OnClickListener {
 
     private TextView txt_cadastro;
+    private TextView campoLogin;
+    private TextView campoSenha;
     private Button bt_login;
     private LoginPresenter presenter;
 
     private void iniciaComponentes(){
         txt_cadastro = findViewById(R.id.cadFornId);
         bt_login = findViewById(R.id.entrarButtonFornId);
+        campoLogin = findViewById(R.id.emailInputId);
+        campoSenha = findViewById(R.id.senhaInputFornId);
     }
 
     @Override
@@ -64,6 +68,13 @@ public class LoginFornecedorActivity extends AppCompatActivity implements LoginV
 
     @Override
     public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.entrarButtonFornId:
+                String login = campoLogin.getText().toString();
+                String senha = campoSenha.getText().toString();
+                presenter.validaDados(login, senha);
+                break;
+        }
         presenter.eventoBotao(view.getId());
     }
 }
