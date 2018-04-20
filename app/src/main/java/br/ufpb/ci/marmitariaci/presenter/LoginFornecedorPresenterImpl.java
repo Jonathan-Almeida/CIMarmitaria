@@ -31,8 +31,8 @@ public class LoginFornecedorPresenterImpl implements LoginPresenter {
     }
 
     @Override
-    public void loginFalhou() {
-
+    public void loginFalhou(String mensagem) {
+        loginView.exibeMensagem("mensagem");
     }
 
     @Override

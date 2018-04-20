@@ -13,21 +13,32 @@ import java.net.URL;
 
 
 //Template Method para formatação de dados e url de envio
-public abstract class ConexaoRemotaTemplate extends AsyncTask<String, Void, String> {
+public abstract class ConexaoRemotaEnvioTemplate extends AsyncTask<String, Void, Integer> {
 
     public abstract String formataParametros(String parametro);
 
     public abstract String linkAcesso();
 
+    public abstract String tipoConexao();
+
     @Override
-    protected String doInBackground(String... strings) {
+    protected Integer doInBackground(String... strings) {
+        URL url = null;
+        HttpURLConnection conn = null;
+        Integer retorno = null;
         try {
-            URL url = new URL(linkAcesso());
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            url = new URL(linkAcesso());
+            conn = (HttpURLConnection) url.openConnection();
             conn.setDoOutput(true);
+            conn.setRequestMethod(tipoConexao());
             OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
             wr.write(formataParametros(strings[0]));
             wr.flush();
+            if(conn.getResponseCode() == 409) {
+                return 409;
+            } else {
+                retorno = conn.getResponseCode();
+            }
             BufferedReader reader = null;
             reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
             StringBuilder sb = new StringBuilder();
@@ -48,6 +59,6 @@ public abstract class ConexaoRemotaTemplate extends AsyncTask<String, Void, Stri
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return null;
+        return retorno;
     }
 }

@@ -33,8 +33,8 @@ public class LoginUsuarioPresenterImpl implements LoginPresenter {
     }
 
     @Override
-    public void loginFalhou() {
-        loginView.exibeMensagem(getContext().getString(R.string.login_incorreto_name));
+    public void loginFalhou(String mensagem) {
+        loginView.exibeMensagem(mensagem);
     }
 
     @Override

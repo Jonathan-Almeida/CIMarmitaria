@@ -1,14 +1,18 @@
 package br.ufpb.ci.marmitariaci.presenter;
 
+import br.ufpb.ci.marmitariaci.model.business.ModelUsuario;
+import br.ufpb.ci.marmitariaci.model.business.ModelUsuarioClienteImpl;
 import br.ufpb.ci.marmitariaci.model.domain.Usuario;
 import br.ufpb.ci.marmitariaci.view.CadastroView;
 
 public class CadastroClientePresenterImpl implements CadastroPresenter {
 
     private CadastroView cadastroView;
+    private ModelUsuario model;
 
     public CadastroClientePresenterImpl(CadastroView cadastroView){
         this.cadastroView = cadastroView;
+        model = new ModelUsuarioClienteImpl(this);
     }
 
 
@@ -19,7 +23,7 @@ public class CadastroClientePresenterImpl implements CadastroPresenter {
         u.setUsuario(strings[1]);
         u.setSenha(strings[2]);
         u.setTelefone(strings[3]);
-        //Enviar para o model
+        model.adiciona(u);
     }
 
     @Override

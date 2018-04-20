@@ -1,22 +1,35 @@
 package br.ufpb.ci.marmitariaci.model.network;
 
+import java.util.concurrent.ExecutionException;
+
+import br.ufpb.ci.marmitariaci.model.business.ModelUsuario;
 import br.ufpb.ci.marmitariaci.model.domain.TipoDeConexao;
 
 public class ConectaServico {
-    private ConexaoRemotaTemplate conexao;
+    private ConexaoRemotaEnvioTemplate conexao;
 
-    public ConectaServico(TipoDeConexao modo) {
+    public ConectaServico(TipoDeConexao modo, ModelUsuario model) {
         switch (modo){
-            /*case porLogin:
-                conexao = new LoginRemoto();
-                break;*/
-            case porCadastro:
-                conexao = new CadastroRemoto();
+            case porLoginCliente:
+                //conexao = new LoginRemoto();
+                break;
+            case porCadastroCliente:
+                conexao = new CadastroClienteRemoto();
+                break;
+            case porCadastroFornecedor:
+                conexao = new CadastroFornecedorRemoto();
                 break;
         }
     }
 
-    public void enviaDados(String parametros){
-        conexao.execute(parametros);
+    public Integer enviaDados(String parametros){
+        try {
+            return conexao.execute(parametros).get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

@@ -46,7 +46,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
     <EditText
-        android:id="@+id/editText3"
+        android:id="@+id/cadInputEmpresaFornId"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -69,10 +69,10 @@
         android:layout_marginTop="8dp"
         android:text="@string/login_name_fornecedor"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText3" />
+        app:layout_constraintTop_toBottomOf="@+id/cadInputEmpresaFornId" />
 
     <EditText
-        android:id="@+id/editText7"
+        android:id="@+id/cadInputEmailFornId"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -95,10 +95,10 @@
         android:layout_marginTop="8dp"
         android:text="@string/senha_name"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText7" />
+        app:layout_constraintTop_toBottomOf="@+id/cadInputEmailFornId" />
 
     <EditText
-        android:id="@+id/editText8"
+        android:id="@+id/cadInputSenhaFornId"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -121,10 +121,10 @@
         android:layout_marginTop="8dp"
         android:text="@string/endereco_label"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText8" />
+        app:layout_constraintTop_toBottomOf="@+id/cadInputSenhaFornId" />
 
     <EditText
-        android:id="@+id/editText9"
+        android:id="@+id/cadInputEndFornId"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -147,10 +147,10 @@
         android:layout_marginTop="8dp"
         android:text="@string/telefone_label"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText9" />
+        app:layout_constraintTop_toBottomOf="@+id/cadInputEndFornId" />
 
     <EditText
-        android:id="@+id/editText10"
+        android:id="@+id/cadInputTelFornId"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -176,6 +176,6 @@
         android:text="@string/botao_cadastrar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText10" />
+        app:layout_constraintTop_toBottomOf="@+id/cadInputTelFornId" />
 
 </android.support.constraint.ConstraintLayout>
