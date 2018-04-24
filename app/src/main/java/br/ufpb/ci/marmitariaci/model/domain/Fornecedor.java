@@ -1,5 +1,8 @@
 package br.ufpb.ci.marmitariaci.model.domain;
 
+import android.arch.persistence.room.Entity;
+
+@Entity
 public class Fornecedor {
 
     private int id;

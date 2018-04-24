@@ -1,8 +1,18 @@
 package br.ufpb.ci.marmitariaci.model.domain;
 
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.ForeignKey;
+import android.arch.persistence.room.PrimaryKey;
+
 import java.util.Date;
 
+@Entity(foreignKeys = @ForeignKey(entity = Fornecedor.class,
+        parentColumns = "id",
+        childColumns = "idFornecedor",
+        onDelete = ForeignKey.CASCADE,
+        onUpdate = ForeignKey.CASCADE))
 public class Cardapio {
+    @PrimaryKey
     private int id;
     private String itens;
     private Date data;
