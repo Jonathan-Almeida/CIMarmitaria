@@ -6,7 +6,6 @@ import br.ufpb.ci.marmitariaci.R;
 import br.ufpb.ci.marmitariaci.model.business.ModelUsuario;
 import br.ufpb.ci.marmitariaci.model.business.ModelUsuarioFornecedorImpl;
 import br.ufpb.ci.marmitariaci.model.domain.Fornecedor;
-import br.ufpb.ci.marmitariaci.view.CadastroClienteActivity;
 import br.ufpb.ci.marmitariaci.view.CadastroFornecedorActivity;
 import br.ufpb.ci.marmitariaci.view.LoginView;
 import br.ufpb.ci.marmitariaci.view.PainelFornecedorActivity;
@@ -31,12 +30,12 @@ public class LoginFornecedorPresenterImpl implements LoginPresenter {
 
     @Override
     public Context getContext() {
-        return null;
+        return (Context) loginView;
     }
 
     @Override
     public void loginSucesso() {
-        loginView.exibeMensagem("Login realizado com sucesso");
+        loginView.exibeMensagem(getContext().getString(R.string.login_correto_name));
         loginView.iniciaActivity(PainelFornecedorActivity.class, true);
     }
 

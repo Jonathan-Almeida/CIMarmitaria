@@ -1,19 +1,19 @@
 <resources>
-    <string name="app_name">MarmitariaCI</string>
-    <string name="boas_vindas_name">Seja bem-vindo, informe abaixo se você é fornecedor de marmitas ou usuário</string>
+    <string name="app_name">Marmitaria CI</string>
+    <string name="boas_vindas_name">Seja bem-vindo, informe abaixo se você é fornecedor de marmitas ou cliente</string>
     <string name="cliente_botao">Sou cliente</string>
     <string name="forn_botao">Sou fornecedor</string>
-    <string name="login_name_usuario">Digite o login</string>
-    <string name="login_name_fornecedor">Digite o e-mail</string>
+    <string name="login_name_usuario">Digite o login para acessar o sistema:</string>
+    <string name="login_name_fornecedor">Digite o seu e-mail para acessar o sistema:</string>
     <string name="cadastro_forn_label">Fornecedor, ainda não possui cadastro? Clique aqui e cadastre-se</string>
     <string name="cadastro_cliente_label">Cliente, ainda não possui cadastro? Clique aqui e cadastre-se</string>
-    <string name="senha_name">Digite a senha</string>
+    <string name="senha_name">Digite a senha:</string>
     <string name="botao_cadastrar">Cadastrar</string>
     <string name="botao_entrar">Entrar</string>
     <string name="login_incorreto_name">Login e/ou senha incorretos</string>
     <string name="login_correto_name">Login realizado com sucesso</string>
     <string name="forn_lista">Lista de fornecedores</string>
-    <string name="forn_nome">Nome:</string>
+    <string name="forn_nome">Nome da empresa:</string>
     <string name="cadapio_label">Cardapio do dia:</string>
     <string name="telefone_label">Telefone de contato:</string>
     <string name="endereco_label">Endereço:</string>
@@ -22,4 +22,6 @@
     <string name="forn_label">Cadastro de Fornecedor</string>
     <string name="forn_nome_label">Nome da empresa:</string>
     <string name="inserir_cardapio">Cadastrar Cardapio de Hoje</string>
+    <string name="cliente_login_label">Login de Cliente</string>
+    <string name="fornecedor_login_label">Login de Fornecedor</string>
 </resources>
