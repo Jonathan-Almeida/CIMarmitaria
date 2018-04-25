@@ -3,6 +3,7 @@ package br.ufpb.ci.marmitariaci.presenter;
 import br.ufpb.ci.marmitariaci.model.business.ModelUsuario;
 import br.ufpb.ci.marmitariaci.model.business.ModelUsuarioClienteImpl;
 import br.ufpb.ci.marmitariaci.model.domain.Usuario;
+import br.ufpb.ci.marmitariaci.util.HttpCodeResponse;
 import br.ufpb.ci.marmitariaci.view.CadastroView;
 
 public class CadastroClientePresenterImpl implements CadastroPresenter {
@@ -27,8 +28,23 @@ public class CadastroClientePresenterImpl implements CadastroPresenter {
     }
 
     @Override
-    public void resultadoCadastro(String msg, boolean encerra) {
-        cadastroView.exibeMensagem(msg, encerra);
+    public void realizandoCadastro() {
+        cadastroView.exibeProgresso();
+    }
+
+    @Override
+    public void resultadoCadastro(String retorno) {
+        cadastroView.ocultaProgresso();
+        int status = HttpCodeResponse.getHttp_response_code();
+        if(status == 404){
+            cadastroView.exibeMensagem("Erro ao conectar ao servidor!", false);
+        } else if (status == 400){
+            cadastroView.exibeMensagem("O usuário já existe", false);
+        } else if(status == 201) {
+            cadastroView.exibeMensagem("Cadastro realizado com sucesso!", true);
+        } else {
+            cadastroView.exibeMensagem("Erro ao conectar ao servidor!", false);
+        }
     }
 
     @Override

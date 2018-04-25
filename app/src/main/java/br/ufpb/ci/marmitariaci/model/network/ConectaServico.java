@@ -4,47 +4,38 @@ import java.util.concurrent.ExecutionException;
 
 import br.ufpb.ci.marmitariaci.model.business.ModelUsuario;
 import br.ufpb.ci.marmitariaci.model.domain.TipoDeConexao;
+import br.ufpb.ci.marmitariaci.presenter.CadastroPresenter;
+import br.ufpb.ci.marmitariaci.presenter.LoginPresenter;
 
 public class ConectaServico {
     private ConexaoRemotaEnvioTemplate conexao;
     private ConexaoRemotaRecuperaTemplate con;
 
-    public ConectaServico(TipoDeConexao modo) {
+    public ConectaServico(TipoDeConexao modo, LoginPresenter loginPresenter, CadastroPresenter cadastroPresenter) {
         switch (modo){
             case porLoginCliente:
-                con = new LoginClienteRemoto();
+                con = new LoginClienteRemoto(loginPresenter);
                 break;
             case porCadastroCliente:
-                conexao = new CadastroClienteRemoto();
+                conexao = new CadastroClienteRemoto(cadastroPresenter);
                 break;
             case porCadastroFornecedor:
-                conexao = new CadastroFornecedorRemoto();
+                conexao = new CadastroFornecedorRemoto(cadastroPresenter);
                 break;
             case porLoginFornecedor:
-                con = new LoginFornecedorRemoto();
+                con = new LoginFornecedorRemoto(loginPresenter);
+                break;
+            case porCadastroCardapio:
+                conexao = new CadastraCardapioRemoto();
                 break;
         }
     }
 
-    public Integer enviaDados(String parametros){
-        try {
-            return conexao.execute(parametros).get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
-        return null;
+    public void enviaDados(String parametros){
+        conexao.execute(parametros);
     }
 
-    public Integer recuperaDados(String... parametros){
-        try {
-            return con.execute(parametros).get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
-        return null;
+    public void recuperaDados(String... parametros){
+        con.execute(parametros);
     }
 }

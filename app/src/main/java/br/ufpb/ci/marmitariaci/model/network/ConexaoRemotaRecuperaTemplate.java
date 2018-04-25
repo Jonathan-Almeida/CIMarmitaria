@@ -8,27 +8,25 @@ import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+import java.net.SocketTimeoutException;
 import java.net.URL;
 
-public abstract class ConexaoRemotaRecuperaTemplate extends AsyncTask<String, Void, Integer> {
+import br.ufpb.ci.marmitariaci.util.HttpCodeResponse;
+
+public abstract class ConexaoRemotaRecuperaTemplate extends AsyncTask<String, Void, String> {
 
     public abstract String linkAcesso(String... parametro);
 
     @Override
-    protected Integer doInBackground(String... strings) {
+    protected String doInBackground(String... strings) {
         URL url = null;
         HttpURLConnection conn = null;
-        Integer retorno = null;
+        String text = "";
         try {
             url = new URL(linkAcesso(strings));
             conn = (HttpURLConnection) url.openConnection();
-            if(conn.getResponseCode() == 401) {
-                return 401;
-            } else if(conn.getResponseCode() != 200) {
-                return conn.getResponseCode();
-            } else {
-                retorno = conn.getResponseCode();
-            }
+            conn.setConnectTimeout(10000);
+            HttpCodeResponse.setHttp_response_code(conn.getResponseCode());
             BufferedReader reader = null;
             reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
             StringBuilder sb = new StringBuilder();
@@ -39,16 +37,18 @@ public abstract class ConexaoRemotaRecuperaTemplate extends AsyncTask<String, Vo
                 // Append server response in string
                 sb.append(line + "\n");
             }
-            String text = "";
             text = sb.toString();
             reader.close();
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
+            HttpCodeResponse.setHttp_response_code(404);
         } catch (MalformedURLException e) {
             e.printStackTrace();
+            HttpCodeResponse.setHttp_response_code(404);
         } catch (IOException e) {
             e.printStackTrace();
+            HttpCodeResponse.setHttp_response_code(404);
         }
-        return retorno;
+        return text;
     }
 }

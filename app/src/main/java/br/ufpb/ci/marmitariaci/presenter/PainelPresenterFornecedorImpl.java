@@ -1,11 +1,12 @@
 package br.ufpb.ci.marmitariaci.presenter;
 
-import br.ufpb.ci.marmitariaci.model.domain.Cardapio;
+import java.util.Date;
+
 
 public class PainelPresenterFornecedorImpl implements PainelPresenter {
     @Override
     public void adicionaCardapio(String itens, String preco) {
-
+        Date date = new Date();
     }
 
     @Override

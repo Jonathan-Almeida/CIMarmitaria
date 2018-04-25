@@ -1,5 +1,6 @@
 package br.ufpb.ci.marmitariaci.view;
 
+import android.app.ProgressDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -22,6 +23,7 @@ public class CadastroFornecedorActivity extends AppCompatActivity implements Cad
     private EditText endereco;
     private EditText telefone;
     private Button botao;
+    private ProgressDialog dialogo_progresso;
 
     private void iniciaComponentes(){
         empresa = findViewById(R.id.cadInputEmpresaFornId);
@@ -30,6 +32,10 @@ public class CadastroFornecedorActivity extends AppCompatActivity implements Cad
         endereco = findViewById(R.id.cadInputEndFornId);
         telefone = findViewById(R.id.cadInputTelFornId);
         botao = findViewById(R.id.button2);
+        dialogo_progresso = new ProgressDialog(this);
+        dialogo_progresso.setMessage("Realizando login, aguarde...");
+        dialogo_progresso.setCancelable(false);
+        dialogo_progresso.setCanceledOnTouchOutside(false);
     }
 
     @Override
@@ -46,6 +52,16 @@ public class CadastroFornecedorActivity extends AppCompatActivity implements Cad
         Toast.makeText(this, mensagem, Toast.LENGTH_SHORT).show();
         if(encerra)
             finish();
+    }
+
+    @Override
+    public void exibeProgresso() {
+        dialogo_progresso.show();
+    }
+
+    @Override
+    public void ocultaProgresso() {
+        dialogo_progresso.dismiss();
     }
 
     @Override

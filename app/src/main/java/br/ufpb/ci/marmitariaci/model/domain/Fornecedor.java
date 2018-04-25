@@ -1,10 +1,11 @@
 package br.ufpb.ci.marmitariaci.model.domain;
 
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
 
 @Entity
 public class Fornecedor {
-
+    @PrimaryKey
     private int id;
     private String nome;
     private String telefone;

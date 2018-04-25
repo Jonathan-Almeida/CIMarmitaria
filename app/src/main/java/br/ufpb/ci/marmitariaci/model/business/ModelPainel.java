@@ -8,4 +8,5 @@ public interface ModelPainel {
     void adicionaCardapio(Cardapio cardapio);
     List listaFornecedores();
     List listaCardapioDoFornecedor(int fornecedor_id);
+    void resultado(String mensagem, boolean encerra);
 }

@@ -24,34 +24,20 @@ public class ModelUsuarioClienteImpl implements ModelUsuario<Usuario> {
 
     @Override
     public void adiciona(Usuario u) {
-        ConectaServico servico = new ConectaServico(TipoDeConexao.porCadastroCliente);
+        ConectaServico servico = new ConectaServico(TipoDeConexao.porCadastroCliente, null, cadastroPresenter);
         String json = new Gson().toJson(u);
-        Integer retorno = servico.enviaDados(json);
-        if(retorno == null){
-            resultado("Erro ao conectar ao servidor", false);
-        }else if(retorno == 409){
-            resultado("Usuário já existe", false);
-        }else if(retorno == 201){
-            resultado("Cadastro realizado com sucesso", true);
-        }
+        servico.enviaDados(json);
     }
 
     @Override
     public void autentica(Usuario u) {
-        ConectaServico servico = new ConectaServico(TipoDeConexao.porLoginCliente);
-        Integer retorno = servico.recuperaDados(u.getUsuario(), u.getSenha());
-        if(retorno == null){
-            erroLogin("Erro ao conectar ao servidor");
-        }else if(retorno == 401){
-            erroLogin("Usuário ou senha incorretos");
-        }else if(retorno == 200){
-            loginPresenter.loginSucesso();
-        }
+        ConectaServico servico = new ConectaServico(TipoDeConexao.porLoginCliente, loginPresenter, null);
+        servico.recuperaDados(u.getUsuario(), u.getSenha());
     }
 
     @Override
     public void resultado(String mensagem, boolean encerra) {
-        cadastroPresenter.resultadoCadastro(mensagem, encerra);
+        //cadastroPresenter.resultadoCadastro(mensagem, encerra);
     }
 
     @Override

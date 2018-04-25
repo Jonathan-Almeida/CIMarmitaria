@@ -1,5 +1,6 @@
 package br.ufpb.ci.marmitariaci.view;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -20,12 +21,17 @@ public class LoginUsuarioActivity extends AppCompatActivity implements LoginView
     private LoginPresenter presenter;
     private EditText campo_login;
     private EditText campo_senha;
+    private ProgressDialog dialogo_progresso;
 
     private void iniciaComponentes(){
         texto_cadastro = findViewById(R.id.cadCliId);
         botao_login = findViewById(R.id.entrarButtonCliId);
         campo_login = findViewById(R.id.loginInputId);
         campo_senha = findViewById(R.id.senhaInputCliId);
+        dialogo_progresso = new ProgressDialog(this);
+        dialogo_progresso.setMessage("Realizando login, aguarde...");
+        dialogo_progresso.setCancelable(false);
+        dialogo_progresso.setCanceledOnTouchOutside(false);
     }
 
     @Override
@@ -40,12 +46,12 @@ public class LoginUsuarioActivity extends AppCompatActivity implements LoginView
 
     @Override
     public void exibeProgresso() {
-
+        dialogo_progresso.show();
     }
 
     @Override
     public void ocultaProgresso() {
-
+        dialogo_progresso.dismiss();
     }
 
     @Override

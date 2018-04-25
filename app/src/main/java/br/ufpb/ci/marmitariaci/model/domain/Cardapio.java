@@ -8,14 +8,14 @@ import java.util.Date;
 
 @Entity(foreignKeys = @ForeignKey(entity = Fornecedor.class,
         parentColumns = "id",
-        childColumns = "idFornecedor",
+        childColumns = "id_fornecedor",
         onDelete = ForeignKey.CASCADE,
         onUpdate = ForeignKey.CASCADE))
 public class Cardapio {
     @PrimaryKey
     private int id;
     private String itens;
-    private Date data;
+    private String data;
     private String preco;
     private int id_fornecedor;
 
@@ -37,11 +37,11 @@ public class Cardapio {
         this.itens = itens;
     }
 
-    public Date getData() {
+    public String getData() {
         return data;
     }
 
-    public void setData(Date data) {
+    public void setData(String data) {
         this.data = data;
     }
 

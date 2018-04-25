@@ -4,8 +4,15 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
 import br.ufpb.ci.marmitariaci.model.business.ModelUsuario;
+import br.ufpb.ci.marmitariaci.presenter.CadastroPresenter;
 
 public class CadastroClienteRemoto extends ConexaoRemotaEnvioTemplate {
+
+    private CadastroPresenter presenter;
+
+    public CadastroClienteRemoto(CadastroPresenter presenter) {
+        this.presenter = presenter;
+    }
 
     @Override
     public String formataParametros(String parametro) {
@@ -27,5 +34,15 @@ public class CadastroClienteRemoto extends ConexaoRemotaEnvioTemplate {
     @Override
     public String tipoConexao() {
         return "POST";
+    }
+
+    @Override
+    protected void onPreExecute() {
+        presenter.realizandoCadastro();
+    }
+
+    @Override
+    protected void onPostExecute(String retorno) {
+        presenter.resultadoCadastro(retorno);
     }
 }
