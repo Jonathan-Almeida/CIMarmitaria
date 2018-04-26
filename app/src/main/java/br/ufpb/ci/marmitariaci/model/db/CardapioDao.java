@@ -1,4 +1,4 @@
-package br.ufpb.ci.marmitariaci.model.domain;
+package br.ufpb.ci.marmitariaci.model.db;
 
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Delete;
@@ -9,12 +9,15 @@ import android.arch.persistence.room.Update;
 import java.util.Date;
 import java.util.List;
 
+import br.ufpb.ci.marmitariaci.model.domain.Cardapio;
+
 @Dao
 public interface CardapioDao {
     @Query("SELECT * FROM Cardapio WHERE id LIKE :id")
     Cardapio getById(int id);
 
     @Query("SELECT * FROM Cardapio WHERE data LIKE :data")
+
     List<Cardapio> getByData(String data);
 
     @Query("SELECT * FROM Cardapio WHERE id_fornecedor LIKE :fornecedorId")
@@ -22,6 +25,7 @@ public interface CardapioDao {
 
     @Query("SELECT * FROM Cardapio WHERE id_fornecedor LIKE :fornecedorId AND "
             + "data LIKE :data")
+
     List<Cardapio> getByFornecedorEData(String fornecedorId, String data);
 
     @Delete

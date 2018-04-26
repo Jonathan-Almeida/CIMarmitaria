@@ -28,7 +28,7 @@ public class CadastroFornecedorRemoto extends ConexaoRemotaEnvioTemplate {
 
     @Override
     public String linkAcesso() {
-        return "http://192.168.43.135:8080/fornecedor";
+        return NetworkResources.ip + "fornecedor";
     }
 
     @Override

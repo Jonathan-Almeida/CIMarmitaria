@@ -28,7 +28,7 @@ public class CadastroClienteRemoto extends ConexaoRemotaEnvioTemplate {
 
     @Override
     public String linkAcesso() {
-        return "http://192.168.43.135:8080/usuario";
+        return NetworkResources.ip + "usuario";
     }
 
     @Override
