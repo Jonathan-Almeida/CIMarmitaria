@@ -3,8 +3,6 @@ package br.ufpb.ci.marmitariaci.model.network;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
-import br.ufpb.ci.marmitariaci.model.business.ModelUsuario;
-
 public class CadastroClienteRemoto extends ConexaoRemotaEnvioTemplate {
 
     @Override
@@ -21,7 +19,7 @@ public class CadastroClienteRemoto extends ConexaoRemotaEnvioTemplate {
 
     @Override
     public String linkAcesso() {
-        return "http://192.168.43.135:8080/usuario";
+        return NetworkResources.ip + "usuario";
     }
 
     @Override
