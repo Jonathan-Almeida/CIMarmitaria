@@ -3,11 +3,6 @@ package br.ufpb.ci.marmitariaci.model.domain;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.PrimaryKey;
-import android.arch.persistence.room.TypeConverters;
-
-import java.util.Date;
-
-import br.ufpb.ci.marmitariaci.model.db.DateConverter;
 
 
 @Entity(foreignKeys = @ForeignKey(entity = Fornecedor.class,
